@@ -1,0 +1,15 @@
+import pandas as pd
+import numpy as np
+
+lst = ['robot'] * 10
+lst += ['human'] * 10
+data = pd.DataFrame({'whoAmI':lst})
+
+
+unique_values = data['whoAmI'].unique()
+one_hot = pd.DataFrame(np.zeros((len(data), len(unique_values)), dtype=int), columns=[f'whoAmI_{value}' for value in unique_values])
+
+for i, value in enumerate(data['whoAmI']):
+    one_hot.loc[i, f'whoAmI_{value}'] = 1
+
+print(one_hot)
